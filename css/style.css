@@ -1,0 +1,10 @@
+.bg {
+    background: url('../img/bg.jpg') no-repeat;
+    -webkit-background-size: contain;
+    background-size: contain;
+    min-height: 768px;
+}
+
+.random-img-pos {
+    position: absolute;
+}
