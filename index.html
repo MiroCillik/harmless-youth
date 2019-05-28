@@ -36,24 +36,41 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     <script type="text/javascript">
-      function getRandomPosition(element, pos) {
+      function getRandomPosition(element) {
         let x = document.body.offsetHeight - element.clientHeight;
         let y = document.body.offsetWidth - element.clientWidth;
-
-        if (pos === 1) {
-          y = y/2;
-        }
 
         let randomX = Math.floor(Math.random()*x);
         let randomY = Math.floor(Math.random()*y);
 
-        if (pos === 2) {
-          if (randomY < y/2) {
-            randomY = randomY + y/2;
-          }
+        return {
+          x: randomX,
+          y: randomY
+        };
+      }
+
+      function getKeyFrames(element, size) {
+        let frames = [];
+
+        for (let i=0; i<size; i++) {
+          const randomPos = getRandomPosition(element);
+          frames.push({
+            top: randomPos.x + 'px',
+            left: randomPos.y + 'px'
+          });
         }
 
-        return [randomX,randomY];
+        return frames;
+      }
+
+      function animate(element) {
+        return element.animate(
+          getKeyFrames(element, 50),
+          {
+            duration: 50000,
+            iterations: Infinity
+          }
+        );
       }
 
       window.onload = function() {
@@ -68,6 +85,13 @@
 
         tshirtImg.style.top = tshirtImgPos[0] + 'px';
         tshirtImg.style.left = tshirtImgPos[1] + 'px';
+
+        const animationH = animate(hoodieImg);
+        const animationT = animate(tshirtImg);
+
+        animationH.play();
+        // animationT.play();
+
       }
     </script>
   </body>
