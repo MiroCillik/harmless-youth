@@ -8,3 +8,13 @@
 .random-img-pos {
     position: absolute;
 }
+
+@media only screen and (max-width: 600px) {
+    .random-img-pos {
+        width: 25%;
+    }
+
+    .bg {
+        min-height: 300px;
+    }
+}
