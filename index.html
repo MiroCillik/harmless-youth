@@ -36,13 +36,23 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     <script type="text/javascript">
-      function getRandomPosition(element) {
-        console.log(element);
+      function getRandomPosition(element, pos) {
+        let x = document.body.offsetHeight - element.clientHeight;
+        let y = document.body.offsetWidth - element.clientWidth;
 
-        var x = document.body.offsetHeight - element.clientHeight;
-        var y = document.body.offsetWidth - element.clientWidth;
-        var randomX = Math.floor(Math.random()*x);
-        var randomY = Math.floor(Math.random()*y);
+        if (pos === 1) {
+          y = y/2;
+        }
+
+        let randomX = Math.floor(Math.random()*x);
+        let randomY = Math.floor(Math.random()*y);
+
+        if (pos === 2) {
+          if (randomY < y/2) {
+            randomY = randomY + y/2;
+          }
+        }
+
         return [randomX,randomY];
       }
 
@@ -50,8 +60,8 @@
         var hoodieImg = document.getElementById('hoodie-pic');
         var tshirtImg = document.getElementById('tshirt-pic');
 
-        var hoodieImgPos = getRandomPosition(hoodieImg);
-        var tshirtImgPos = getRandomPosition(tshirtImg);
+        var hoodieImgPos = getRandomPosition(hoodieImg, 1);
+        var tshirtImgPos = getRandomPosition(tshirtImg, 2);
 
         hoodieImg.style.top = hoodieImgPos[0] + 'px';
         hoodieImg.style.left = hoodieImgPos[1] + 'px';
